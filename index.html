@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deepak Rail World | Blue Tech Edition</title>
+    <title>Deepak Rail World | AI Edition</title>
     <style>
         :root {
-            --primary-blue: #00d4ff; /* Electric Blue */
+            --primary-blue: #00d4ff;
             --pure-white: #ffffff;
-            --deep-black: #0a0e17; /* Tech Black */
+            --deep-black: #0a0e17;
             --card-glass: rgba(255, 255, 255, 0.03);
         }
 
         body {
             margin: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             background: var(--deep-black);
             color: var(--pure-white);
             overflow-x: hidden;
@@ -36,12 +36,7 @@
             box-sizing: border-box;
         }
 
-        nav h2 { 
-            color: var(--pure-white); 
-            margin: 0; 
-            letter-spacing: 3px; 
-            font-weight: 800;
-        }
+        nav h2 { margin: 0; letter-spacing: 3px; font-weight: 800; }
         nav h2 span { color: var(--primary-blue); }
 
         /* HERO SECTION */
@@ -56,289 +51,186 @@
             padding: 0 20px;
         }
 
-        .hero h1 { 
-            font-size: clamp(35px, 8vw, 75px); 
-            margin: 0; 
-            color: var(--pure-white);
-            text-transform: uppercase;
-        }
-        .hero h1 span { 
-            color: var(--primary-blue); 
-            text-shadow: 0 0 30px rgba(0, 212, 255, 0.4); 
-        }
+        .hero h1 { font-size: clamp(35px, 8vw, 75px); margin: 0; text-transform: uppercase; }
+        .hero h1 span { color: var(--primary-blue); text-shadow: 0 0 30px rgba(0, 212, 255, 0.4); }
 
         .explore-btn {
             margin-top: 40px;
-            padding: 18px 45px;
-            font-size: 16px;
+            padding: 15px 35px;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 2px;
             color: var(--deep-black);
             background: var(--primary-blue);
             border: none;
-            border-radius: 4px; /* Professional Square-ish look */
+            border-radius: 4px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: 0.3s;
         }
 
-        .explore-btn:hover {
-            background: var(--pure-white);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
-        }
-
-        /* TRAIN CARDS SECTION */
-        .section { padding: 120px 20px; max-width: 1300px; margin: 0 auto; text-align: center; }
-        .section-title { margin-bottom: 60px; font-size: 32px; border-left: 5px solid var(--primary-blue); padding-left: 15px; display: inline-block; }
-
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
+        /* CARDS SECTION */
+        .section { padding: 120px 20px; max-width: 1200px; margin: 0 auto; text-align: center; }
+        .cards-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
 
         .card {
             background: var(--card-glass);
             border-radius: 12px;
             padding: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: 0.4s;
             cursor: pointer;
             text-align: left;
         }
 
-        .card:hover {
-            transform: scale(1.03);
-            border-color: var(--primary-blue);
-            background: rgba(0, 212, 255, 0.05);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-        }
-
-        .card img { width: 100%; border-radius: 8px; height: 180px; object-fit: cover; margin-bottom: 15px; }
-        .card h3 { font-size: 22px; margin: 10px 0; color: var(--pure-white); }
-        .card p { color: #8892b0; font-size: 14px; line-height: 1.6; }
+        .card:hover { border-color: var(--primary-blue); transform: translateY(-10px); background: rgba(0, 212, 255, 0.05); }
+        .card img { width: 100%; border-radius: 8px; height: 160px; object-fit: cover; }
 
         /* DETAILS SECTION */
-        .details {
+        .details { display: none; padding: 120px 20px; min-height: 100vh; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .detail-item { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 60px; align-items: center; background: rgba(255,255,255,0.02); padding: 20px; border-radius: 15px; }
+        .detail-item img { width: 100%; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); }
+        .detail-text h4 { color: var(--primary-blue); font-size: 24px; margin-bottom: 10px; }
+
+        /* CHATBOT UI */
+        #chat-window {
             display: none;
-            padding: 120px 20px;
-            min-height: 100vh;
-            animation: slideUp 0.6s ease-out;
-        }
-
-        @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* CUSTOM THEMES (Subtle Glows) */
-        .theme-wap4 { background: linear-gradient(180deg, #1a0505 0%, #0a0e17 100%); }
-        .theme-wap5 { background: linear-gradient(180deg, #112240 0%, #0a0e17 100%); }
-        .theme-wap7 { background: linear-gradient(180deg, #051a1a 0%, #0a0e17 100%); }
-        .theme-wdp4d { background: linear-gradient(180deg, #1a1505 0%, #0a0e17 100%); }
-
-        .details-content { max-width: 1100px; margin: 0 auto; }
-        
-        .detail-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 50px; }
-
-        .detail-item {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-            margin-bottom: 80px;
-            background: rgba(255,255,255,0.02);
-            padding: 30px;
-            border-radius: 20px;
-        }
-
-        .detail-item:nth-child(even) { direction: rtl; }
-        .detail-item:nth-child(even) .detail-text { direction: ltr; }
-
-        .detail-item img { width: 100%; border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); }
-        .detail-text h4 { color: var(--primary-blue); font-size: 26px; margin-bottom: 15px; }
-        .detail-text p { font-size: 17px; line-height: 1.8; color: #ccd6f6; }
-
-        .back-btn {
-            padding: 10px 25px;
-            background: transparent;
-            color: var(--primary-blue);
+            width: 320px;
+            height: 450px;
+            background: #0f172a;
             border: 1px solid var(--primary-blue);
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
+            border-radius: 15px;
+            flex-direction: column;
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            z-index: 3000;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            overflow: hidden;
         }
 
-        .back-btn:hover { background: var(--primary-blue); color: var(--deep-black); }
+        #chat-messages { flex: 1; padding: 15px; overflow-y: auto; font-size: 14px; display: flex; flex-direction: column; gap: 10px; }
+        .msg { padding: 8px 12px; border-radius: 10px; max-width: 80%; line-height: 1.4; }
+        .user-msg { background: var(--primary-blue); color: #000; align-self: flex-end; }
+        .ai-msg { background: rgba(255,255,255,0.1); color: #fff; align-self: flex-start; }
 
-        footer { padding: 60px; text-align: center; background: #02060c; border-top: 1px solid rgba(255,255,255,0.05); }
+        footer { padding: 40px; text-align: center; font-size: 12px; color: #444; border-top: 1px solid rgba(255,255,255,0.05); }
 
-        @media (max-width: 768px) {
-            .detail-item { grid-template-columns: 1fr; gap: 20px; text-align: center; }
-            .detail-item:nth-child(even) { direction: ltr; }
-            nav { padding: 15px 20px; }
-        }
+        @media (max-width: 768px) { .detail-item { grid-template-columns: 1fr; text-align: center; } nav { padding: 15px 20px; } }
     </style>
 </head>
 <body>
 
 <nav>
     <h2>Deepak<span>Rail</span></h2>
-    <div style="color: #8892b0; font-size: 12px;">v2.0 PRO</div>
+    <div style="color: var(--primary-blue); font-weight: bold; font-size: 12px; border: 1px solid; padding: 2px 8px; border-radius: 4px;">AI ACTIVE</div>
 </nav>
 
 <section class="hero" id="home">
     <h1>Powering the <span>Nation</span></h1>
-    <p style="color: #8892b0; max-width: 600px; margin-top: 15px;">A specialized gallery featuring the legendary locomotives of Indian Railways. Crafted for enthusiasts.</p>
-    <button class="explore-btn" onclick="scrollToTrains()">Enter Gallery</button>
+    <p style="color: #8892b0;">The Ultimate Gallery of Indian Locomotives</p>
+    <button class="explore-btn" onclick="document.getElementById('trains').scrollIntoView({behavior:'smooth'})">Explore Fleet</button>
 </section>
 
-<section class="section" id="train-list">
-    <h2 class="section-title">The Electric & Diesel Fleet</h2>
+<section class="section" id="trains">
     <div class="cards-container">
-        <div class="card" onclick="showDetails('wap4', 'theme-wap4')">
-            <img src="images/wap4-1.jpeg" alt="WAP4">
-            <h3>WAP-4 Class</h3>
-            <p>Reliable, powerful, and the most loved passenger locomotive with 5000 HP capacity.</p>
-        </div>
-        <div class="card" onclick="showDetails('wap5', 'theme-wap5')">
-            <img src="images/wap5-1.jpeg" alt="WAP5">
-            <h3>WAP-5 Class</h3>
-            <p>India's first Bo-Bo locomotive capable of speeds up to 160 km/h for premium trains.</p>
-        </div>
-        <div class="card" onclick="showDetails('wap7', 'theme-wap7')">
-            <img src="images/wap7-1.jpeg" alt="WAP7">
-            <h3>WAP-7 Class</h3>
-            <p>The 6350 HP powerhouse designed to haul 24-coach trains with aggressive acceleration.</p>
-        </div>
-        <div class="card" onclick="showDetails('wdp4d', 'theme-wdp4d')">
-            <img src="images/wdp4d-1.jpeg" alt="WDP4D">
-            <h3>WDP-4D Class</h3>
-            <p>The EMD giant with dual cabs, specialized for high-speed passenger duties on diesel routes.</p>
-        </div>
+        <div class="card" onclick="showD('wap4')"><img src="images/wap4-1.jpeg"><h3>WAP-4</h3><p>Passenger Workhorse</p></div>
+        <div class="card" onclick="showD('wap5')"><img src="images/wap5-1.jpeg"><h3>WAP-5</h3><p>High Speed Beauty</p></div>
+        <div class="card" onclick="showD('wap7')"><img src="images/wap7-1.jpeg"><h3>WAP-7</h3><p>Electric Beast</p></div>
+        <div class="card" onclick="showD('wdp4d')"><img src="images/wdp4d-1.jpeg"><h3>WDP-4D</h3><p>Diesel Giant</p></div>
     </div>
 </section>
 
 <div id="wap4" class="details">
-    <div class="details-content">
-        <div class="detail-header">
-            <h2>WAP-4 Series</h2>
-            <button class="back-btn" onclick="goBack()">CLOSE GALLERY</button>
-        </div>
-        <div class="detail-item">
-            <img src="images/wap4-1.jpeg">
-            <div class="detail-text">
-                <h4>Legendary Build</h4>
-                <p>Manufactured by CLW, the WAP-4 is a more powerful version of WAP-1, featuring a lighter body and high-speed pantographs.</p>
-            </div>
-        </div>
-        <div class="detail-item">
-            <img src="images/wap4-2.jpeg">
-            <div class="detail-text">
-                <h4>Performance</h4>
-                <p>Known for its distinctive 'whine' and red livery, it remains the backbone of Indian Railways' passenger fleet.</p>
-            </div>
-        </div>
-    </div>
+    <div style="max-width:1000px; margin:auto;"><button class="explore-btn" onclick="goB()">← Back</button>
+    <h2 style="color: var(--primary-blue); font-size: 32px; margin: 30px 0;">WAP-4 Class</h2>
+    <div class="detail-item"><img src="images/wap4-1.jpeg"><div class="detail-text"><h4>Legendary Power</h4><p>Iconic red locomotive of India.</p></div></div>
+    <div class="detail-item"><img src="images/wap4-2.jpeg"><div class="detail-text"><h4>Reliability</h4><p>Backbone of express trains for decades.</p></div></div></div>
 </div>
 
 <div id="wap5" class="details">
-    <div class="details-content">
-        <div class="detail-header">
-            <h2>WAP-5 Series</h2>
-            <button class="back-btn" onclick="goBack()">CLOSE GALLERY</button>
-        </div>
-        <div class="detail-item">
-            <img src="images/wap5-1.jpeg">
-            <div class="detail-text">
-                <h4>Swiss Technology</h4>
-                <p>Based on the ABB Locomotive, the WAP-5 features regenerative braking and GTO/IGBT traction control.</p>
-            </div>
-        </div>
-        <div class="detail-item">
-            <img src="images/wap5-2.jpeg">
-            <div class="detail-text">
-                <h4>Speed Mastery</h4>
-                <p>Primarily used for Gatimaan and Bhopal Shatabdi, it is built for the fastest tracks in India.</p>
-            </div>
-        </div>
-    </div>
+    <div style="max-width:1000px; margin:auto;"><button class="explore-btn" onclick="goB()">← Back</button>
+    <h2 style="color: var(--primary-blue); font-size: 32px; margin: 30px 0;">WAP-5 Class</h2>
+    <div class="detail-item"><img src="images/wap5-1.jpeg"><div class="detail-text"><h4>Speed King</h4><p>Swiss technology for premium trains like Gatimaan.</p></div></div></div>
 </div>
 
 <div id="wap7" class="details">
-    <div class="details-content">
-        <div class="detail-header">
-            <h2>WAP-7 Series</h2>
-            <button class="back-btn" onclick="goBack()">CLOSE GALLERY</button>
-        </div>
-        <div class="detail-item">
-            <img src="images/wap7-1.jpeg">
-            <div class="detail-text">
-                <h4>The Heavy Hauler</h4>
-                <p>Equipped with 3-Phase technology, it is the most powerful passenger locomotive in Indian Railways' regular service.</p>
-            </div>
-        </div>
-        <div class="detail-item">
-            <img src="images/wap7-2.jpeg">
-            <div class="detail-text">
-                <h4>Energy Efficiency</h4>
-                <p>WAP-7 uses Hotel Load technology to provide power to train coaches directly from the loco.</p>
-            </div>
-        </div>
-    </div>
+    <div style="max-width:1000px; margin:auto;"><button class="explore-btn" onclick="goB()">← Back</button>
+    <h2 style="color: var(--primary-blue); font-size: 32px; margin: 30px 0;">WAP-7 Class</h2>
+    <div class="detail-item"><img src="images/wap7-1.jpeg"><div class="detail-text"><h4>Heavy Hauler</h4><p>6350 HP Beast for long LHB rakes.</p></div></div></div>
 </div>
 
 <div id="wdp4d" class="details">
-    <div class="details-content">
-        <div class="detail-header">
-            <h2>WDP-4D Series</h2>
-            <button class="back-btn" onclick="goBack()">CLOSE GALLERY</button>
-        </div>
-        <div class="detail-item">
-            <img src="images/wdp4d-1.jpeg">
-            <div class="detail-text">
-                <h4>Dual Cab Design</h4>
-                <p>The 'D' stands for Dual Cab, resolving the visibility issues of its predecessors while maintaining the 4500 HP output.</p>
-            </div>
-        </div>
-        <div class="detail-item">
-            <img src="images/wdp4d-2.jpeg">
-            <div class="detail-text">
-                <h4>Diesel Dominance</h4>
-                <p>Powered by the EMD 710 engine, it is renowned for its reliability on challenging terrains and long-distance diesel hauls.</p>
-            </div>
-        </div>
+    <div style="max-width:1000px; margin:auto;">
+        <button class="explore-btn" onclick="goB()">← Back</button>
+        <h2 style="color: var(--primary-blue); font-size: 32px; margin: 30px 0;">WDP-4D Series</h2>
+        <div class="detail-item"><img src="images/wdp4d-1.jpeg"><div class="detail-text"><h4>Dual Cab</h4><p>Better visibility and control for pilots.</p></div></div>
+        <div class="detail-item"><img src="images/wdp4d-2.jpeg"><div class="detail-text"><h4>EMD Power</h4><p>4500 HP Diesel engine performance.</p></div></div>
+        <div class="detail-item"><img src="images/wdp4d-3.jpeg"><div class="detail-text"><h4>Diesel Legend</h4><p>The king of non-electrified railway routes.</p></div></div>
     </div>
 </div>
 
-<footer>
-    <p style="color: #495057;">&copy; 2026 Deepak Rail World | Designed for Performance</p>
-</footer>
+<button id="chat-btn" style="position:fixed; bottom:20px; right:20px; padding:15px; border-radius:50%; background:var(--primary-blue); border:none; cursor:pointer; font-size:24px; z-index:4000; box-shadow: 0 0 20px rgba(0,212,255,0.4);">🤖</button>
+
+<div id="chat-window">
+    <div style="background:var(--primary-blue); color:#000; padding:15px; font-weight:bold; display:flex; justify-content:space-between;">
+        <span>Rail Assistant</span>
+        <span style="cursor:pointer" onclick="document.getElementById('chat-window').style.display='none'">×</span>
+    </div>
+    <div id="chat-messages"></div>
+    <div style="padding:10px; display:flex; gap:5px; border-top:1px solid #333;">
+        <input type="text" id="chat-input" placeholder="Ask about trains..." style="flex:1; background:transparent; border:1px solid #444; color:#fff; padding:8px; border-radius:5px; outline:none;">
+        <button id="send-btn" style="background:var(--primary-blue); border:none; padding:8px 15px; border-radius:5px; cursor:pointer; font-weight:bold;">Send</button>
+    </div>
+</div>
+
+<footer>&copy; 2026 Deepak Rail World | AI Powered</footer>
 
 <script>
-    function scrollToTrains() {
-        document.getElementById("train-list").scrollIntoView({behavior: "smooth"});
-    }
-
-    function showDetails(id, themeClass) {
-        document.getElementById("train-list").style.display = "none";
-        document.getElementById("home").style.display = "none";
-        document.body.className = themeClass;
-        
+    function showD(id) {
+        document.getElementById('home').style.display = 'none';
+        document.getElementById('trains').style.display = 'none';
         document.querySelectorAll('.details').forEach(d => d.style.display = 'none');
-        const detailView = document.getElementById(id);
-        detailView.style.display = 'block';
+        document.getElementById(id).style.display = 'block';
         window.scrollTo({top: 0, behavior: 'smooth'});
     }
-
-    function goBack() {
-        document.body.className = ""; 
-        document.getElementById("train-list").style.display = "block";
-        document.getElementById("home").style.display = "flex";
+    function goB() {
         document.querySelectorAll('.details').forEach(d => d.style.display = 'none');
-        setTimeout(() => {
-            document.getElementById("train-list").scrollIntoView({behavior: "smooth"});
-        }, 100);
+        document.getElementById('home').style.display = 'flex';
+        document.getElementById('trains').style.display = 'block';
     }
-</script>
 
+    // AI LOGIC WITH YOUR API KEY
+    const KEY = "AIzaSyD85TqL7hNV1cq1CgmFkd6z4nN-7O4B6X0"; 
+    const chatBtn = document.getElementById('chat-btn');
+    const chatWin = document.getElementById('chat-window');
+    const sendBtn = document.getElementById('send-btn');
+    const chatInp = document.getElementById('chat-input');
+    const chatMsg = document.getElementById('chat-messages');
+
+    chatBtn.onclick = () => chatWin.style.display = chatWin.style.display === 'flex' ? 'none' : 'flex';
+
+    async function callGemini() {
+        const txt = chatInp.value;
+        if(!txt) return;
+        chatMsg.innerHTML += `<div class="msg user-msg">${txt}</div>`;
+        chatInp.value = '';
+        
+        try {
+            const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${KEY}`, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({contents: [{parts: [{text: "You are a helpful Indian Railway expert for Deepak's website. Answer: " + txt}]}]})
+            });
+            const data = await res.json();
+            const reply = data.candidates[0].content.parts[0].text;
+            chatMsg.innerHTML += `<div class="msg ai-msg">${reply}</div>`;
+            chatMsg.scrollTop = chatMsg.scrollHeight;
+        } catch(e) { chatMsg.innerHTML += `<div class="msg ai-msg" style="color:red">Error: Connection issue!</div>`; }
+    }
+
+    sendBtn.onclick = callGemini;
+    chatInp.onkeypress = (e) => { if(e.key === 'Enter') callGemini(); };
+</script>
 </body>
 </html>
