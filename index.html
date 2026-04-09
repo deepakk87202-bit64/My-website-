@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deepak Rail World | AI Edition</title>
+    <title>Deepak Rail World | Blue Tech Edition</title>
     <style>
         :root {
             --primary-blue: #00d4ff;
@@ -14,7 +14,7 @@
 
         body {
             margin: 0;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background: var(--deep-black);
             color: var(--pure-white);
             overflow-x: hidden;
@@ -56,181 +56,292 @@
 
         .explore-btn {
             margin-top: 40px;
-            padding: 15px 35px;
+            padding: 18px 45px;
+            font-size: 16px;
             font-weight: bold;
             text-transform: uppercase;
+            letter-spacing: 2px;
             color: var(--deep-black);
             background: var(--primary-blue);
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s ease-in-out;
         }
 
-        /* CARDS SECTION */
-        .section { padding: 120px 20px; max-width: 1200px; margin: 0 auto; text-align: center; }
-        .cards-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+        .explore-btn:hover { background: var(--pure-white); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3); }
 
+        /* TRAIN CARDS SECTION */
+        .section { padding: 120px 20px; max-width: 1300px; margin: 0 auto; text-align: center; }
+        .section-title { margin-bottom: 60px; font-size: 32px; display: inline-block; border-bottom: 2px solid var(--primary-blue); padding-bottom: 10px; }
+
+        .cards-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+
+        /* TRANSITION: Smooth hover zoom */
         .card {
             background: var(--card-glass);
             border-radius: 12px;
             padding: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: 0.4s;
+            transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             text-align: left;
         }
 
-        .card:hover { border-color: var(--primary-blue); transform: translateY(-10px); background: rgba(0, 212, 255, 0.05); }
-        .card img { width: 100%; border-radius: 8px; height: 160px; object-fit: cover; }
+        .card:hover { transform: scale(1.03); border-color: var(--primary-blue); background: rgba(0, 212, 255, 0.05); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .card img { width: 100%; border-radius: 8px; height: 180px; object-fit: cover; margin-bottom: 15px; }
+        .card h3 { font-size: 22px; margin: 10px 0; color: var(--pure-white); }
+        .card p { color: #8892b0; font-size: 14px; line-height: 1.6; }
 
-        /* DETAILS SECTION */
-        .details { display: none; padding: 120px 20px; min-height: 100vh; animation: fadeIn 0.5s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        .detail-item { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 60px; align-items: center; background: rgba(255,255,255,0.02); padding: 20px; border-radius: 15px; }
-        .detail-item img { width: 100%; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); }
-        .detail-text h4 { color: var(--primary-blue); font-size: 24px; margin-bottom: 10px; }
-
-        /* CHATBOT UI */
-        #chat-window {
+        /* DETAILS SECTION & TRANSITIONS */
+        .details {
             display: none;
-            width: 320px;
-            height: 450px;
-            background: #0f172a;
-            border: 1px solid var(--primary-blue);
-            border-radius: 15px;
-            flex-direction: column;
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            z-index: 3000;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
-            overflow: hidden;
+            padding: 120px 20px;
+            min-height: 100vh;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
 
-        #chat-messages { flex: 1; padding: 15px; overflow-y: auto; font-size: 14px; display: flex; flex-direction: column; gap: 10px; }
-        .msg { padding: 8px 12px; border-radius: 10px; max-width: 80%; line-height: 1.4; }
-        .user-msg { background: var(--primary-blue); color: #000; align-self: flex-end; }
-        .ai-msg { background: rgba(255,255,255,0.1); color: #fff; align-self: flex-start; }
+        /* TRANSITION: Fade in slide up */
+        .details.active { display: block; opacity: 1; transform: translateY(0); }
 
-        footer { padding: 40px; text-align: center; font-size: 12px; color: #444; border-top: 1px solid rgba(255,255,255,0.05); }
+        /* THEMES (Subtle Blue Tech Glow) */
+        .details { background: linear-gradient(180deg, #112240 0%, #0a0e17 100%); }
 
-        @media (max-width: 768px) { .detail-item { grid-template-columns: 1fr; text-align: center; } nav { padding: 15px 20px; } }
+        .details-content { max-width: 1100px; margin: 0 auto; }
+        .detail-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 50px; }
+
+        .detail-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            margin-bottom: 80px;
+            background: rgba(255,255,255,0.02);
+            padding: 30px;
+            border-radius: 20px;
+            transition: background 0.3s;
+        }
+
+        .detail-item:hover { background: rgba(255,255,255,0.04); }
+        .detail-item img { width: 100%; border-radius: 15px; box-shadow: 0 15px 40px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); }
+        .detail-text h4 { color: var(--primary-blue); font-size: 26px; margin-bottom: 15px; }
+        .detail-text p { font-size: 17px; line-height: 1.8; color: #ccd6f6; }
+
+        .back-btn { padding: 10px 25px; background: transparent; color: var(--primary-blue); border: 1px solid var(--primary-blue); border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .back-btn:hover { background: var(--primary-blue); color: var(--deep-black); }
+
+        /* CHATBOT UI & THEME */
+        #chat-wrapper { position: fixed; bottom: 20px; right: 20px; z-index: 2000; }
+        #chat-btn { background: var(--primary-blue); border: none; padding: 15px; border-radius: 50%; cursor: pointer; box-shadow: 0 0 20px rgba(0,212,255,0.4); font-size: 24px; }
+        
+        #chat-window {
+            display: none;
+            width: 300px;
+            height: 400px;
+            background: #112240;
+            border: 1px solid var(--primary-blue);
+            border-radius: 10px;
+            flex-direction: column;
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            direction: ltr !important; /* Force left to right for chat text */
+        }
+
+        #chat-window.active { display: flex; animation: slideUp 0.3s ease; }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        #chat-header { background: var(--primary-blue); color: #000; padding: 10px; font-weight: bold; text-align: center; }
+        #chat-messages { flex: 1; padding: 10px; overflow-y: auto; font-size: 14px; color: #fff; display: flex; flex-direction: column; gap: 8px; }
+        #chat-input-area { display: flex; padding: 10px; border-top: 1px solid rgba(255,255,255,0.1); gap: 5px; }
+        #chat-input { flex: 1; background: transparent; border: 1px solid #333; color: #fff; padding: 5px 8px; border-radius: 4px; outline: none; transition: border-color 0.3s; }
+        #chat-input:focus { border-color: var(--primary-blue); }
+        #send-btn { background: var(--primary-blue); border: none; margin-left: 5px; cursor: pointer; padding: 5px 12px; border-radius: 4px; font-weight: bold; }
+
+        footer { padding: 60px; text-align: center; background: #02060c; border-top: 1px solid rgba(255,255,255,0.05); color: #444; font-size: 12px; }
+
+        @media (max-width: 768px) { .detail-item { grid-template-columns: 1fr; gap: 20px; text-align: center; } nav { padding: 15px 20px; } }
     </style>
 </head>
 <body>
 
 <nav>
     <h2>Deepak<span>Rail</span></h2>
-    <div style="color: var(--primary-blue); font-weight: bold; font-size: 12px; border: 1px solid; padding: 2px 8px; border-radius: 4px;">AI ACTIVE</div>
+    <div style="color: #8892b0; font-size: 12px;">v2.1 PRO</div>
 </nav>
 
 <section class="hero" id="home">
     <h1>Powering the <span>Nation</span></h1>
-    <p style="color: #8892b0;">The Ultimate Gallery of Indian Locomotives</p>
-    <button class="explore-btn" onclick="document.getElementById('trains').scrollIntoView({behavior:'smooth'})">Explore Fleet</button>
+    <p style="color: #8892b0;">A Specialized Locomotive Gallery.</p>
+    <button class="explore-btn" onclick="document.getElementById('train-list').scrollIntoView({behavior:'smooth'})">Explore Fleet</button>
 </section>
 
-<section class="section" id="trains">
+<section class="section" id="train-list">
+    <h2 class="section-title">The Electric & Diesel Fleet</h2>
     <div class="cards-container">
-        <div class="card" onclick="showD('wap4')"><img src="images/wap4-1.jpeg"><h3>WAP-4</h3><p>Passenger Workhorse</p></div>
-        <div class="card" onclick="showD('wap5')"><img src="images/wap5-1.jpeg"><h3>WAP-5</h3><p>High Speed Beauty</p></div>
-        <div class="card" onclick="showD('wap7')"><img src="images/wap7-1.jpeg"><h3>WAP-7</h3><p>Electric Beast</p></div>
-        <div class="card" onclick="showD('wdp4d')"><img src="images/wdp4d-1.jpeg"><h3>WDP-4D</h3><p>Diesel Giant</p></div>
+        <div class="card" onclick="showDetails('wap4')">
+            <img src="images/wap4-1.jpeg" alt="WAP4">
+            <h3>WAP-4 Class</h3>
+            <p>Reliable, powerful, and loved, boasting a 5000 HP capacity.</p>
+        </div>
+        <div class="card" onclick="showDetails('wap5')">
+            <img src="images/wap5-1.jpeg" alt="WAP5">
+            <h3>WAP-5 Class</h3>
+            <p>India's first Bo-Bo locomotive, capable of 160 km/h.</p>
+        </div>
+        <div class="card" onclick="showDetails('wap7')">
+            <img src="images/wap7-1.jpeg" alt="WAP7">
+            <h3>WAP-7 Class</h3>
+            <p>6350 HP powerhouse designed for heavy acceleration.</p>
+        </div>
+        <div class="card" onclick="showDetails('wdp4d')">
+            <img src="images/wdp4d-1.jpeg" alt="WDP4D">
+            <h3>WDP-4D Class</h3>
+            <p>Diesel giant with dual cabs for non-electrified routes.</p>
+        </div>
     </div>
 </section>
 
 <div id="wap4" class="details">
-    <div style="max-width:1000px; margin:auto;"><button class="explore-btn" onclick="goB()">← Back</button>
-    <h2 style="color: var(--primary-blue); font-size: 32px; margin: 30px 0;">WAP-4 Class</h2>
-    <div class="detail-item"><img src="images/wap4-1.jpeg"><div class="detail-text"><h4>Legendary Power</h4><p>Iconic red locomotive of India.</p></div></div>
-    <div class="detail-item"><img src="images/wap4-2.jpeg"><div class="detail-text"><h4>Reliability</h4><p>Backbone of express trains for decades.</p></div></div></div>
+    <div class="details-content">
+        <div class="detail-header"><h2>WAP-4 Series</h2><button class="back-btn" onclick="goBack()">CLOSE GALLERY</button></div>
+        <div class="detail-item"><img src="images/wap4-1.jpeg"><div class="detail-text"><h4>Legendary Build</h4><p>WAP-4 is a more powerful version of WAP-1, featuring a lighter body and high-speed pantographs.</p></div></div>
+        <div class="detail-item"><img src="images/wap4-2.jpeg"><div class="detail-text"><h4>Performance</h4><p>Known for its distinctive 'whine' and red livery, it is the backbone of express services.</p></div></div>
+    </div>
 </div>
 
 <div id="wap5" class="details">
-    <div style="max-width:1000px; margin:auto;"><button class="explore-btn" onclick="goB()">← Back</button>
-    <h2 style="color: var(--primary-blue); font-size: 32px; margin: 30px 0;">WAP-5 Class</h2>
-    <div class="detail-item"><img src="images/wap5-1.jpeg"><div class="detail-text"><h4>Speed King</h4><p>Swiss technology for premium trains like Gatimaan.</p></div></div></div>
+    <div class="details-content">
+        <div class="detail-header"><h2>WAP-5 Series</h2><button class="back-btn" onclick="goBack()">CLOSE GALLERY</button></div>
+        <div class="detail-item"><img src="images/wap5-1.jpeg"><div class="detail-text"><h4>Swiss Tech</h4><p>Based on ABB technology, WAP-5 features regenerative braking and IGBT traction.</p></div></div>
+    </div>
 </div>
 
 <div id="wap7" class="details">
-    <div style="max-width:1000px; margin:auto;"><button class="explore-btn" onclick="goB()">← Back</button>
-    <h2 style="color: var(--primary-blue); font-size: 32px; margin: 30px 0;">WAP-7 Class</h2>
-    <div class="detail-item"><img src="images/wap7-1.jpeg"><div class="detail-text"><h4>Heavy Hauler</h4><p>6350 HP Beast for long LHB rakes.</p></div></div></div>
+    <div class="details-content">
+        <div class="detail-header"><h2>WAP-7 Series</h2><button class="back-btn" onclick="goBack()">CLOSE GALLERY</button></div>
+        <div class="detail-item"><img src="images/wap7-1.jpeg"><div class="detail-text"><h4>Heavy Hauler</h4><p>6350 HP Beast, optimized to pull 24-coach LHB trains with aggressive acceleration.</p></div></div>
+    </div>
 </div>
 
 <div id="wdp4d" class="details">
-    <div style="max-width:1000px; margin:auto;">
-        <button class="explore-btn" onclick="goB()">← Back</button>
-        <h2 style="color: var(--primary-blue); font-size: 32px; margin: 30px 0;">WDP-4D Series</h2>
-        <div class="detail-item"><img src="images/wdp4d-1.jpeg"><div class="detail-text"><h4>Dual Cab</h4><p>Better visibility and control for pilots.</p></div></div>
-        <div class="detail-item"><img src="images/wdp4d-2.jpeg"><div class="detail-text"><h4>EMD Power</h4><p>4500 HP Diesel engine performance.</p></div></div>
-        <div class="detail-item"><img src="images/wdp4d-3.jpeg"><div class="detail-text"><h4>Diesel Legend</h4><p>The king of non-electrified railway routes.</p></div></div>
+    <div class="details-content">
+        <div class="detail-header"><h2>WDP-4D Series</h2><button class="back-btn" onclick="goBack()">CLOSE GALLERY</button></div>
+        <div class="detail-item"><img src="images/wdp4d-1.jpeg"><div class="detail-text"><h4>Dual Cab Diesel</h4><p>Features an EMD 710 engine for high-speed passenger duties on diesel routes.</p></div></div>
+        <div class="detail-item"><img src="images/wdp4d-2.jpeg"><div class="detail-text"><h4>Reliability</h4><p>Designed for long-distance durability on Indian challenging terrains.</p></div></div>
+        <div class="detail-item"><img src="images/wdp4d-3.jpeg"><div class="detail-text"><h4>Sound of Diesel</h4><p>Famous rhythmic chugging sound, known as the 'Coffin-Vending Machine' by railfans.</p></div></div>
     </div>
 </div>
 
-<button id="chat-btn" style="position:fixed; bottom:20px; right:20px; padding:15px; border-radius:50%; background:var(--primary-blue); border:none; cursor:pointer; font-size:24px; z-index:4000; box-shadow: 0 0 20px rgba(0,212,255,0.4);">🤖</button>
-
-<div id="chat-window">
-    <div style="background:var(--primary-blue); color:#000; padding:15px; font-weight:bold; display:flex; justify-content:space-between;">
-        <span>Rail Assistant</span>
-        <span style="cursor:pointer" onclick="document.getElementById('chat-window').style.display='none'">×</span>
-    </div>
-    <div id="chat-messages"></div>
-    <div style="padding:10px; display:flex; gap:5px; border-top:1px solid #333;">
-        <input type="text" id="chat-input" placeholder="Ask about trains..." style="flex:1; background:transparent; border:1px solid #444; color:#fff; padding:8px; border-radius:5px; outline:none;">
-        <button id="send-btn" style="background:var(--primary-blue); border:none; padding:8px 15px; border-radius:5px; cursor:pointer; font-weight:bold;">Send</button>
+<div id="chat-wrapper">
+    <button id="chat-btn">🤖</button>
+    <div id="chat-window">
+        <div id="chat-header">Rail AI Assistant</div>
+        <div id="chat-messages"></div>
+        <div id="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Ask about trains...">
+            <button id="send-btn">Send</button>
+        </div>
     </div>
 </div>
 
-<footer>&copy; 2026 Deepak Rail World | AI Powered</footer>
+<footer>Powered by Deepak Rail World | v2.1 PRO</footer>
 
 <script>
-    function showD(id) {
-        document.getElementById('home').style.display = 'none';
-        document.getElementById('trains').style.display = 'none';
-        document.querySelectorAll('.details').forEach(d => d.style.display = 'none');
-        document.getElementById(id).style.display = 'block';
+    // Transition functions for details panel
+    function showDetails(id) {
+        // Smoothly hide main view
+        document.getElementById("home").style.display = "none";
+        document.getElementById("train-list").style.display = "none";
+        
+        // Hide all detail panels and reset active class
+        const allDetails = document.querySelectorAll('.details');
+        allDetails.forEach(d => {
+            d.style.display = "none";
+            d.classList.remove('active');
+        });
+
+        // Show the correct detail panel with transition
+        const targetDetail = document.getElementById(id);
+        targetDetail.style.display = "block";
+        // Force a brief delay for transition to kick in
+        setTimeout(() => { targetDetail.classList.add('active'); }, 10);
         window.scrollTo({top: 0, behavior: 'smooth'});
     }
-    function goB() {
-        document.querySelectorAll('.details').forEach(d => d.style.display = 'none');
-        document.getElementById('home').style.display = 'flex';
-        document.getElementById('trains').style.display = 'block';
+
+    function goBack() {
+        // Reset and hide detail panels
+        const allDetails = document.querySelectorAll('.details');
+        allDetails.forEach(d => {
+            d.classList.remove('active');
+            d.style.display = "none";
+        });
+
+        // Smoothly show main view
+        document.getElementById("home").style.display = "flex";
+        document.getElementById("train-list").style.display = "block";
+        
+        // Optional: Scroll back to the last selected train
+        document.getElementById("train-list").scrollIntoView({behavior:'smooth'});
     }
 
-    // AI LOGIC WITH YOUR API KEY
-    const KEY = "AIzaSyD85TqL7hNV1cq1CgmFkd6z4nN-7O4B6X0"; 
+    // AI Chatbot Logic
     const chatBtn = document.getElementById('chat-btn');
     const chatWin = document.getElementById('chat-window');
     const sendBtn = document.getElementById('send-btn');
     const chatInp = document.getElementById('chat-input');
     const chatMsg = document.getElementById('chat-messages');
 
-    chatBtn.onclick = () => chatWin.style.display = chatWin.style.display === 'flex' ? 'none' : 'flex';
+    // Smooth Slide-up transition for chatbot
+    chatBtn.onclick = () => { chatWin.classList.toggle('active'); };
+
+    // Set YOUR_API_KEY directly from user input
+    const API_KEY = "AIzaSyD85TqL7hNV1cq1CgmFkd6z4e0aXQnCQ8w";
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
     async function callGemini() {
-        const txt = chatInp.value;
-        if(!txt) return;
-        chatMsg.innerHTML += `<div class="msg user-msg">${txt}</div>`;
+        const text = chatInp.value;
+        if (!text) return;
+
+        // Display user message
+        chatMsg.innerHTML += `<div style="align-self: flex-end; background: #00d4ff; color: #000; padding: 8px; border-radius: 8px; max-width: 80%;"><b>Deepak:</b> ${text}</div>`;
         chatInp.value = '';
-        
+        chatMsg.scrollTop = chatMsg.scrollHeight;
+
         try {
-            const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${KEY}`, {
+            const response = await fetch(url, {
                 method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({contents: [{parts: [{text: "You are a helpful Indian Railway expert for Deepak's website. Answer: " + txt}]}]})
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: "You are a specialized railway expert assistant for 'Deepak Rail World'. Provide accurate, brief technical details about Indian locomotives. Answer: " + text }] }]
+                })
             });
-            const data = await res.json();
-            const reply = data.candidates[0].content.parts[0].text;
-            chatMsg.innerHTML += `<div class="msg ai-msg">${reply}</div>`;
-            chatMsg.scrollTop = chatMsg.scrollHeight;
-        } catch(e) { chatMsg.innerHTML += `<div class="msg ai-msg" style="color:red">Error: Connection issue!</div>`; }
+
+            const data = await response.json();
+            
+            if (data.error) {
+                // Handle API error gracefully
+                chatMsg.innerHTML += `<div style="align-self: flex-start; background: orange; color: black; padding: 8px; border-radius: 8px; max-width: 80%;"><b>API Error:</b> ${data.error.message}</div>`;
+            } else {
+                // Success path
+                const aiReply = data.candidates[0].content.parts[0].text;
+                chatMsg.innerHTML += `<div style="align-self: flex-start; background: rgba(255,255,255,0.1); color: white; padding: 8px; border-radius: 8px; max-width: 80%;"><b>Gemini:</b> ${aiReply}</div>`;
+            }
+
+        } catch (error) {
+            // Handle network/connection error
+            chatMsg.innerHTML += `<div style="align-self: flex-start; background: red; color: white; padding: 8px; border-radius: 8px; max-width: 80%;"><b>Connection Error:</b> Setup main Key check karein!</div>`;
+        }
+        chatMsg.scrollTop = chatMsg.scrollHeight;
     }
 
     sendBtn.onclick = callGemini;
-    chatInp.onkeypress = (e) => { if(e.key === 'Enter') callGemini(); };
+    chatInp.addEventListener("keypress", (e) => { if(e.key === "Enter") callGemini(); });
 </script>
+
 </body>
 </html>
