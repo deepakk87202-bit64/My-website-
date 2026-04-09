@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deepak Rail World | Pro</title>
+    <style>
+        :root {
+            --primary: #00f7ff;
+            --bg: #050a18;
+            --card-bg: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: white;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* NAVBAR */
+        nav {
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+
+        nav h2 { color: var(--primary); margin: 0; letter-spacing: 2px; }
+
+        /* HERO SECTION */
+        .hero {
+            height: 100vh;
+            background: radial-gradient(circle at center, #1e293b 0%, #050a18 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero h1 { font-size: clamp(40px, 8vw, 80px); margin: 0; transition: 0.5s; }
+        .hero h1 span { color: var(--primary); text-shadow: 0 0 20px rgba(0,247,255,0.5); }
+
+        .explore-btn {
+            margin-top: 30px;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #000;
+            background: var(--primary);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 247, 255, 0.4);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .explore-btn:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 247, 255, 0.6);
+            background: white;
+        }
+
+        /* MAIN LIST */
+        .section { padding: 100px 20px; text-align: center; }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.4s;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-15px);
+            background: rgba(255,255,255,0.1);
+            border-color: var(--primary);
+        }
+
+        .card img { width: 100%; border-radius: 15px; height: 200px; object-fit: cover; }
+        .card h3 { font-size: 24px; margin: 15px 0; color: var(--primary); }
+
+        /* DETAILS PAGE (Professional Layout) */
+        .details {
+            display: none;
+            padding-top: 100px;
+            min-height: 100vh;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* THEMES */
+        .theme-wap4 { background: linear-gradient(to bottom, #450a0a, #050a18); }
+        .theme-wap5 { background: linear-gradient(to bottom, #334155, #050a18); }
+        .theme-wap7 { background: linear-gradient(to bottom, #0f172a, #050a18); }
+
+        .details-content { max-width: 1000px; margin: 0 auto; padding: 20px; }
+
+        /* PHOTO WITH TEXT GRID */
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 60px;
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 25px;
+            text-align: left;
+            transition: 0.3s;
+        }
+
+        .detail-item:nth-child(even) { flex-direction: row-reverse; }
+        .detail-item:hover { background: rgba(255,255,255,0.08); }
+
+        .detail-item img { width: 45%; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .detail-text { width: 55%; }
+        .detail-text h4 { color: var(--primary); font-size: 22px; margin-bottom: 10px; }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 40px;
+            padding: 12px 30px;
+            background: transparent;
+            color: white;
+            border: 2px solid var(--primary);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover { background: var(--primary); color: black; }
+
+        footer { padding: 40px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); }
+    </style>
+</head>
+<body>
+
+<nav>
+    <h2>RailWorld</h2>
+</nav>
+
+<section class="hero" id="home">
+    <h1>Meet The <span>Giants</span></h1>
+    <p>Premium Indian Railway Locomotive Showcase</p>
+    <button class="explore-btn" onclick="scrollToTrains()">Explore Trains</button>
+</section>
+
+<section class="section" id="train-list">
+    <div class="cards-container">
+        <div class="card" onclick="showDetails('wap4', 'theme-wap4')">
+            <img src="images/wap4-1.jpeg" alt="WAP4">
+            <h3>WAP-4 Class</h3>
+            <p>The Red Beast of IR</p>
+        </div>
+        <div class="card" onclick="showDetails('wap5', 'theme-wap5')">
+            <img src="images/wap5-1.jpeg" alt="WAP5">
+            <h3>WAP-5 Class</h3>
+            <p>High Speed White Beauty</p>
+        </div>
+        <div class="card" onclick="showDetails('wap7', 'theme-wap7')">
+            <img src="images/wap7-1.jpeg" alt="WAP7">
+            <h3>WAP-7 Class</h3>
+            <p>The Powerhouse</p>
+        </div>
+    </div>
+</section>
+
+<div id="wap4" class="details">
+    <div class="details-content">
+        <button class="back-btn" onclick="goBack()">← Back to Fleet</button>
+        <h2>WAP-4: Detailed Overview</h2>
+        
+        <div class="detail-item">
+            <img src="images/wap4-1.jpeg">
+            <div class="detail-text">
+                <h4>Dynamic Design</h4>
+                <p>Equipped with 5000 HP, this locomotive is designed for heavy hauling at 140 km/h. Its red livery makes it iconic on Indian tracks.</p>
+            </div>
+        </div>
+
+        <div class="detail-item">
+            <img src="images/wap4-2.jpeg">
+            <div class="detail-text">
+                <h4>Operational History</h4>
+                <p>Introduced in 1994 to replace the aging WAM-4, it became the backbone of passenger services in India.</p>
+            </div>
+        </div>
+
+        <div class="detail-item">
+            <img src="images/wap4-3.jpeg">
+            <div class="detail-text">
+                <h4>Pantograph System</h4>
+                <p>Features advanced high-reach pantographs for stable current collection at high speeds.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="wap5" class="details">
+    <div class="details-content">
+        <button class="back-btn" onclick="goBack()">← Back to Fleet</button>
+        <h2>WAP-5: High Speed Legend</h2>
+        
+        <div class="detail-item">
+            <img src="images/wap5-1.jpeg">
+            <div class="detail-text">
+                <h4>Rajdhani Specialist</h4>
+                <p>Specifically imported from ABB for high-speed Shatabdi and Rajdhani express trains.</p>
+            </div>
+        </div>
+
+        <div class="detail-item">
+            <img src="images/wap5-2.jpeg">
+            <div class="detail-text">
+                <h4>Lightweight Design</h4>
+                <p>The 5400 HP Bo-Bo design allows for rapid acceleration up to 160 km/h.</p>
+            </div>
+        </div>
+
+        <div class="detail-item">
+            <img src="images/wap5-3.jpeg">
+            <div class="detail-text">
+                <h4>Aerodynamic Body</h4>
+                <p>The sloped front helps in cutting through air resistance during high-speed runs.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="wap7" class="details">
+    <div class="details-content">
+        <button class="back-btn" onclick="goBack()">← Back to Fleet</button>
+        <h2>WAP-7: The King of Tracks</h2>
+        
+        <div class="detail-item">
+            <img src="images/wap7-1.jpeg">
+            <div class="detail-text">
+                <h4>Extreme Power</h4>
+                <p>Generating 6350 HP, it can pull 24-coach trains with ease at 140 km/h.</p>
+            </div>
+        </div>
+
+        <div class="detail-item">
+            <img src="images/wap7-2.jpeg">
+            <div class="detail-text">
+                <h4>Regenerative Braking</h4>
+                <p>Highly efficient energy-saving technology that feeds power back to the grid during braking.</p>
+            </div>
+        </div>
+
+        <div class="detail-item">
+            <img src="images/wap7-3.jpeg">
+            <div class="detail-text">
+                <h4>Reliability</h4>
+                <p>Known for its rock-solid reliability across all railway zones in India.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>Built with Passion by Deepak | Railway Enthusiast 🚆</p>
+</footer>
+
+<script>
+    function scrollToTrains() {
+        document.getElementById("train-list").scrollIntoView({behavior: "smooth"});
+    }
+
+    function showDetails(id, themeClass) {
+        document.getElementById("train-list").style.display = "none";
+        document.getElementById("home").style.display = "none";
+        
+        // Remove old themes and add new one
+        document.body.className = themeClass;
+        
+        document.querySelectorAll('.details').forEach(d => d.style.display = 'none');
+        document.getElementById(id).style.display = 'block';
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    function goBack() {
+        document.body.className = ""; // Reset theme
+        document.getElementById("train-list").style.display = "block";
+        document.getElementById("home").style.display = "flex";
+        document.querySelectorAll('.details').forEach(d => d.style.display = 'none');
+        setTimeout(() => {
+            document.getElementById("train-list").scrollIntoView({behavior: "smooth"});
+        }, 100);
+    }
+</script>
+
+</body>
+</html>
