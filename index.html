@@ -7,125 +7,134 @@
 
 <style>
 :root {
-    --primary-blue:#00d4ff;
-    --deep-black:#0a0e17;
+    --blue:#00d4ff;
 }
 
-body {
+body{
     margin:0;
-    font-family:'Segoe UI',Arial;
-    background:var(--deep-black);
+    font-family:Arial;
+    background:#0a0e17;
     color:white;
+    overflow-x:hidden;
 }
 
 /* NAV */
-nav {
-    padding:15px 50px;
-    display:flex;
-    justify-content:space-between;
+nav{
+    padding:15px 40px;
     position:fixed;
     width:100%;
     background:#0a0e17;
+    z-index:1000;
 }
 
 /* HERO */
-.hero {
+.hero{
     height:100vh;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
     text-align:center;
+    animation:fadeIn 1.5s ease;
 }
 
-.hero h1 {
-    font-size:60px;
-}
+.hero span{color:var(--blue);}
 
-.hero span { color:var(--primary-blue); }
-
-.hero p {
-    color:#aaa;
-    max-width:600px;
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(40px);}
+    to{opacity:1;}
 }
 
 /* BUTTON */
-.btn {
-    padding:12px 30px;
+.btn{
+    padding:12px 25px;
     border:none;
-    border-radius:25px;
     background:linear-gradient(45deg,#00d4ff,#0072ff);
+    border-radius:25px;
     cursor:pointer;
-    transition:0.3s;
+    transition:.3s;
 }
-
-.btn:hover {
-    transform:scale(1.1);
+.btn:hover{
+    transform:scale(1.15);
 }
 
 /* CARDS */
-.section { padding:120px 20px; }
+.section{padding:120px 20px;}
 
-.cards-container {
+.cards-container{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
     gap:25px;
 }
 
-.card {
+.card{
     position:relative;
-    cursor:pointer;
     overflow:hidden;
     border-radius:10px;
+    cursor:pointer;
 }
 
-.card img {
+.card img{
     width:100%;
-    height:170px;
+    height:180px;
     object-fit:cover;
+    transition:.4s;
 }
 
-/* COLOR OVERLAY */
-.card::after {
+/* BLUE OVERLAY */
+.card::after{
     content:"";
     position:absolute;
     top:0; left:0;
     width:100%; height:100%;
-    background:rgba(0,212,255,0.3);
+    background:rgba(0,212,255,0.4);
     opacity:0;
-    transition:0.3s;
+    transition:.4s;
 }
 
-.card:hover::after {
-    opacity:1;
-}
+.card:hover::after{opacity:1;}
+.card:hover img{transform:scale(1.1);}
 
-.card h3 {
+.card h3{
     position:absolute;
     bottom:10px;
     left:15px;
 }
 
 /* DETAILS */
-.details {
+.details{
     display:none;
     padding:120px 20px;
+    animation:fadeIn .8s ease;
 }
 
-.detail-item {
+.detail-item{
     margin-bottom:40px;
 }
 
-.detail-item img {
+.detail-item img{
     width:100%;
+    max-height:350px;
+    object-fit:cover;
+    border-radius:10px;
 }
 
+/* THEMES */
+.wap4{color:#ff4d4d;}
+.wap5{color:#ffffff;}
+.wap7{color:#00d4ff;}
+.wdp4d{color:#9bbcff;}
+
 /* FOOTER */
-footer {
+footer{
     text-align:center;
-    padding:20px;
+    padding:25px;
     background:#111;
-    color:#888;
+    font-weight:bold;
+    font-size:18px;
+}
+footer span{
+    color:#00d4ff;
 }
 </style>
 </head>
@@ -133,13 +142,13 @@ footer {
 <body>
 
 <nav>
-<h2>Deepak<span>Rail</span></h2>
+<h2>Deepak<span style="color:#00d4ff;">Rail</span></h2>
 </nav>
 
 <section class="hero" id="home">
 <h1>POWERING THE <span>NATION</span></h1>
-<p>Experience the power, speed and engineering excellence of Indian Railways locomotives.</p>
-<p>From electric giants to diesel beasts — explore the backbone of the nation's transport system.</p>
+<p>Explore India's most powerful locomotives with detailed insights, specs and visuals.</p>
+<p>From classic engines to modern electric beasts — everything in one place.</p>
 <button class="btn" onclick="scrollToTrains()">Explore Fleet</button>
 </section>
 
@@ -147,23 +156,19 @@ footer {
 <div class="cards-container">
 
 <div class="card" onclick="showD('wap4')">
-<img src="images/wap4-1.jpeg">
-<h3>WAP-4</h3>
+<img src="images/wap4-1.jpeg"><h3>WAP-4</h3>
 </div>
 
 <div class="card" onclick="showD('wap5')">
-<img src="images/wap5-1.jpeg">
-<h3>WAP-5</h3>
+<img src="images/wap5-1.jpeg"><h3>WAP-5</h3>
 </div>
 
 <div class="card" onclick="showD('wap7')">
-<img src="images/wap7-1.jpeg">
-<h3>WAP-7</h3>
+<img src="images/wap7-1.jpeg"><h3>WAP-7</h3>
 </div>
 
 <div class="card" onclick="showD('wdp4d')">
-<img src="images/wdp4d-1.jpeg">
-<h3>WDP-4D</h3>
+<img src="images/wdp4d-1.jpeg"><h3>WDP-4D</h3>
 </div>
 
 </div>
@@ -171,56 +176,56 @@ footer {
 
 <!-- DETAILS -->
 
-<div id="wap4" class="details">
+<div id="wap4" class="details wap4">
 <button class="btn" onclick="goB()">Back</button>
 <h2>WAP-4</h2>
-<p>WAP-4 is one of the most reliable passenger locomotives of Indian Railways.</p>
+<p>WAP-4 is one of the most reliable electric locomotives of Indian Railways.</p>
+<p>Power: 5000 HP | Built: CLW | Speed: 130 km/h</p>
+<p>Used mainly for long-distance express trains across India.</p>
 
 <div class="detail-item"><img src="images/wap4-1.jpeg"></div>
 <div class="detail-item"><img src="images/wap4-2.jpeg"></div>
 <div class="detail-item"><img src="images/wap4-3.jpeg"></div>
-
-<p>Power: 5000 HP | Type: Electric | Use: Express trains</p>
 </div>
 
-<div id="wap5" class="details">
+<div id="wap5" class="details wap5">
 <button class="btn" onclick="goB()">Back</button>
 <h2>WAP-5</h2>
-<p>High speed locomotive used in premium trains like Shatabdi.</p>
+<p>High-speed locomotive based on Swiss technology.</p>
+<p>Speed: 160 km/h | Tech: ABB | Feature: Regenerative braking</p>
+<p>Used in premium trains like Shatabdi & Gatimaan Express.</p>
 
 <div class="detail-item"><img src="images/wap5-1.jpeg"></div>
 <div class="detail-item"><img src="images/wap5-2.jpeg"></div>
 <div class="detail-item"><img src="images/wap5-3.jpeg"></div>
-
-<p>Top Speed: 160 km/h | Tech: ABB | Feature: Regenerative braking</p>
 </div>
 
-<div id="wap7" class="details">
+<div id="wap7" class="details wap7">
 <button class="btn" onclick="goB()">Back</button>
 <h2>WAP-7</h2>
-<p>Powerful locomotive designed for heavy passenger trains.</p>
+<p>Most powerful passenger locomotive in India.</p>
+<p>Power: 6350 HP | Use: LHB trains | Feature: High torque</p>
+<p>Handles heavy loads with excellent acceleration.</p>
 
 <div class="detail-item"><img src="images/wap7-1.jpeg"></div>
 <div class="detail-item"><img src="images/wap7-2.jpeg"></div>
 <div class="detail-item"><img src="images/wap7-3.jpeg"></div>
-
-<p>Power: 6350 HP | Use: LHB trains | Feature: High acceleration</p>
 </div>
 
-<div id="wdp4d" class="details">
+<div id="wdp4d" class="details wdp4d">
 <button class="btn" onclick="goB()">Back</button>
 <h2>WDP-4D</h2>
-<p>Diesel locomotive for non-electrified routes with dual cab design.</p>
+<p>Diesel locomotive with dual cab design.</p>
+<p>Power: 4500 HP | Type: Diesel | Built by EMD</p>
+<p>Used in non-electrified routes across India.</p>
 
 <div class="detail-item"><img src="images/wdp4d-1.jpeg"></div>
 <div class="detail-item"><img src="images/wdp4d-2.jpeg"></div>
 <div class="detail-item"><img src="images/wdp4d-3.jpeg"></div>
-
-<p>Power: 4500 HP | Type: Diesel | Feature: Dual Cab</p>
 </div>
 
 <footer>
-Passionate by Deepak Rail Works
+<span>Passionate by Deepak RailWorks</span> | Indian Railways
 </footer>
 
 <script>
