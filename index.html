@@ -11,45 +11,82 @@ body {
   font-family: 'Segoe UI', sans-serif;
   background: #0f172a;
   color: white;
-  transition: 0.3s;
+  overflow-x: hidden;
 }
 
-body.light {
-  background: #ffffff;
-  color: black;
+/* BACKGROUND DESIGN */
+body::before {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255,255,255,0.03) 0px,
+    rgba(255,255,255,0.03) 1px,
+    transparent 1px,
+    transparent 20px
+  );
+  z-index: -1;
 }
 
+/* LOADER */
+.loader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #020617;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.loader h1 {
+  color: #00f7ff;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0.3; }
+}
+
+/* TOGGLE BUTTON */
+.toggle-btn {
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  background: #00f7ff;
+  border-radius: 20px;
+}
+
+/* HERO */
 .hero {
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  animation: fadeIn 2s;
 }
 
-.hero h1 span {
+.hero span {
   color: #00f7ff;
 }
 
-button {
-  padding: 10px 20px;
-  border-radius: 20px;
-  border: none;
-  cursor: pointer;
+/* ANIMATION */
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1;}
 }
 
-.search-box {
-  margin: 20px;
+/* SECTION */
+.section {
+  padding: 60px 20px;
   text-align: center;
 }
 
-.search-box input {
-  padding: 10px;
-  width: 250px;
-  border-radius: 20px;
-  border: none;
-}
-
+/* CARDS */
 .cards {
   display: flex;
   flex-wrap: wrap;
@@ -62,13 +99,13 @@ button {
   padding: 15px;
   border-radius: 15px;
   width: 280px;
-  cursor: pointer;
   transition: 0.3s;
+  cursor: pointer;
 }
 
-.card.active {
-  border: 3px solid #00f7ff;
-  box-shadow: 0 0 15px #00f7ff;
+.card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 0 20px #00f7ff;
 }
 
 .card img {
@@ -78,156 +115,154 @@ button {
   border-radius: 10px;
 }
 
+/* DETAILS */
 .details {
   display: none;
   padding: 30px;
+  animation: fadeIn 1s;
 }
 
 .details.active {
   display: block;
 }
 
-#wap4 { background: #3b0a0a; }
-#wap5 { background: #ffffff; color: black; }
-#wap7 { background: linear-gradient(135deg,#ffffff,#0ea5e9); color: black; }
-#wdp4d { background: linear-gradient(135deg,#000000,#1e293b,#0ea5e9); }
-
-.slider {
-  position: relative;
-  text-align: center;
-}
-
+/* SLIDER */
 .slider img {
-  width: 250px;
-  height: 160px;
-  object-fit: cover;
+  width: 260px;
   border-radius: 10px;
 }
 
-.slider button {
-  position: absolute;
-  top: 40%;
-  background: rgba(0,0,0,0.5);
-  color: white;
+/* BUTTONS */
+button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
 }
 
-.prev { left: 0; }
-.next { right: 0; }
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: black;
+  margin-top: 50px;
+}
 
-@media(max-width: 600px) {
-  .card { width: 90%; }
+/* LIGHT MODE */
+body.light {
+  background: #ffffff;
+  color: black;
 }
 </style>
 </head>
 
 <body>
 
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <h1>Loading 🚆</h1>
+</div>
+
+<button class="toggle-btn" onclick="toggleMode()">Change Theme</button>
+
+<!-- HERO -->
 <section class="hero">
   <h1>Hello, I'm <span>Deepak</span></h1>
   <p>Railway Info Website 🚆</p>
-  <button onclick="toggleMode()">🌙 Toggle Mode</button>
 </section>
 
-<div class="search-box">
-  <input type="text" placeholder="Search Locomotive..." onkeyup="searchLoco(this.value)">
-</div>
+<!-- TRAIN SECTION -->
+<section class="section">
+  <h2>Electric & Diesel Locomotives</h2>
 
-<div class="cards">
+  <div class="cards">
 
-  <div class="card" onclick="showDetails('wap4', this)">
-    <img src="images/wap4-1.jpeg">
-    <h3>WAP-4</h3>
+    <div class="card" onclick="showDetails('wap4')">
+      <img src="images/wap4-1.jpeg">
+      <h3>WAP-4</h3>
+    </div>
+
+    <div class="card" onclick="showDetails('wap5')">
+      <img src="images/wap5-1.jpeg">
+      <h3>WAP-5</h3>
+    </div>
+
+    <div class="card" onclick="showDetails('wap7')">
+      <img src="images/wap7-1.jpeg">
+      <h3>WAP-7</h3>
+    </div>
+
+    <div class="card" onclick="showDetails('wdp4d')">
+      <img src="images/wdp4d-1.jpeg">
+      <h3>WDP-4D</h3>
+    </div>
+
   </div>
+</section>
 
-  <div class="card" onclick="showDetails('wap5', this)">
-    <img src="images/wap5-1.jpeg">
-    <h3>WAP-5</h3>
-  </div>
-
-  <div class="card" onclick="showDetails('wap7', this)">
-    <img src="images/wap7-1.jpeg">
-    <h3>WAP-7</h3>
-  </div>
-
-  <div class="card" onclick="showDetails('wdp4d', this)">
-    <img src="images/wdp4d-1.jpeg">
-    <h3>WDP-4D</h3>
-  </div>
-
-</div>
+<!-- DETAILS -->
 
 <div id="wap4" class="details">
-  <h2>WAP-4</h2>
-  <div class="slider">
-    <button class="prev" onclick="changeSlide(-1,'wap4')">❮</button>
-    <img id="wap4-img" src="images/wap4-1.jpeg">
-    <button class="next" onclick="changeSlide(1,'wap4')">❯</button>
-  </div>
+<h2>WAP-4</h2>
+<p>
+Power: 5000 HP<br>
+Type: Electric<br>
+Speed: 140 km/h<br>
+Use: Passenger trains
+</p>
 </div>
 
 <div id="wap5" class="details">
-  <h2>WAP-5</h2>
-  <div class="slider">
-    <button class="prev" onclick="changeSlide(-1,'wap5')">❮</button>
-    <img id="wap5-img" src="images/wap5-1.jpeg">
-    <button class="next" onclick="changeSlide(1,'wap5')">❯</button>
-  </div>
+<h2>WAP-5</h2>
+<p>
+Power: 5400 HP<br>
+Type: Electric High-Speed<br>
+Speed: 160 km/h<br>
+Used in Rajdhani trains
+</p>
 </div>
 
 <div id="wap7" class="details">
-  <h2>WAP-7</h2>
-  <div class="slider">
-    <button class="prev" onclick="changeSlide(-1,'wap7')">❮</button>
-    <img id="wap7-img" src="images/wap7-1.jpeg">
-    <button class="next" onclick="changeSlide(1,'wap7')">❯</button>
-  </div>
+<h2>WAP-7</h2>
+<p>
+Power: 6350 HP<br>
+Type: Heavy Electric<br>
+Speed: 140 km/h<br>
+Used for long heavy trains
+</p>
 </div>
 
 <div id="wdp4d" class="details">
-  <h2>WDP-4D</h2>
-  <div class="slider">
-    <button class="prev" onclick="changeSlide(-1,'wdp4d')">❮</button>
-    <img id="wdp4d-img" src="images/wdp4d-1.jpeg">
-    <button class="next" onclick="changeSlide(1,'wdp4d')">❯</button>
-  </div>
+<h2>WDP-4D</h2>
+<p>
+Power: 4500 HP<br>
+Type: Diesel<br>
+Speed: 160 km/h<br>
+Dual cab locomotive<br>
+Used in express trains
+</p>
 </div>
 
+<!-- FOOTER -->
+<footer>
+  Passionate by Deepak RailWorks | Indian Railways 🇮🇳
+</footer>
+
 <script>
+// LOADER
+window.onload = () => {
+  document.getElementById("loader").style.display = "none";
+};
+
+// THEME
 function toggleMode() {
   document.body.classList.toggle("light");
 }
 
-function searchLoco(val) {
-  let cards = document.querySelectorAll(".card");
-  cards.forEach(card => {
-    card.style.display = card.innerText.toLowerCase().includes(val.toLowerCase()) ? "block" : "none";
-  });
-}
-
-function showDetails(id, el) {
+// DETAILS
+function showDetails(id) {
   document.querySelectorAll('.details').forEach(d => d.classList.remove('active'));
-  document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
-
   document.getElementById(id).classList.add('active');
-  el.classList.add('active');
-}
-
-let images = {
-  wap4: ["images/wap4-1.jpeg","images/wap4-2.jpeg","images/wap4-3.jpeg"],
-  wap5: ["images/wap5-1.jpeg","images/wap5-2.jpeg","images/wap5-3.jpeg"],
-  wap7: ["images/wap7-1.jpeg","images/wap7-2.jpeg","images/wap7-3.jpeg"],
-  wdp4d: ["images/wdp4d-1.jpeg","images/wdp4d-2.jpeg","images/wdp4d-3.jpeg"]
-};
-
-let index = { wap4:0, wap5:0, wap7:0, wdp4d:0 };
-
-function changeSlide(dir, loco) {
-  index[loco] += dir;
-
-  if(index[loco] < 0) index[loco] = images[loco].length - 1;
-  if(index[loco] >= images[loco].length) index[loco] = 0;
-
-  document.getElementById(loco+"-img").src = images[loco][index[loco]];
 }
 </script>
 
