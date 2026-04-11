@@ -3,246 +3,231 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Deepak Rail World | Pro Edition</title>
+<title>Deepak Rail World</title>
 
 <style>
-:root {
-    --blue:#00d4ff;
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #0f172a;
+  color: white;
+  transition: 0.3s;
 }
 
-body{
-    margin:0;
-    font-family:Arial;
-    background:#0a0e17;
-    color:white;
-    overflow-x:hidden;
+body.light {
+  background: #ffffff;
+  color: black;
 }
 
-/* NAV */
-nav{
-    padding:15px 40px;
-    position:fixed;
-    width:100%;
-    background:#0a0e17;
-    z-index:1000;
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 
-/* HERO */
-.hero{
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    animation:fadeIn 1.5s ease;
+.hero h1 span {
+  color: #00f7ff;
 }
 
-.hero span{color:var(--blue);}
-
-@keyframes fadeIn{
-    from{opacity:0; transform:translateY(40px);}
-    to{opacity:1;}
+button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
 }
 
-/* BUTTON */
-.btn{
-    padding:12px 25px;
-    border:none;
-    background:linear-gradient(45deg,#00d4ff,#0072ff);
-    border-radius:25px;
-    cursor:pointer;
-    transition:.3s;
-}
-.btn:hover{
-    transform:scale(1.15);
+.search-box {
+  margin: 20px;
+  text-align: center;
 }
 
-/* CARDS */
-.section{padding:120px 20px;}
-
-.cards-container{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:25px;
+.search-box input {
+  padding: 10px;
+  width: 250px;
+  border-radius: 20px;
+  border: none;
 }
 
-.card{
-    position:relative;
-    overflow:hidden;
-    border-radius:10px;
-    cursor:pointer;
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
 }
 
-.card img{
-    width:100%;
-    height:180px;
-    object-fit:cover;
-    transition:.4s;
+.card {
+  background: #1e293b;
+  padding: 15px;
+  border-radius: 15px;
+  width: 280px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-/* BLUE OVERLAY */
-.card::after{
-    content:"";
-    position:absolute;
-    top:0; left:0;
-    width:100%; height:100%;
-    background:rgba(0,212,255,0.4);
-    opacity:0;
-    transition:.4s;
+.card.active {
+  border: 3px solid #00f7ff;
+  box-shadow: 0 0 15px #00f7ff;
 }
 
-.card:hover::after{opacity:1;}
-.card:hover img{transform:scale(1.1);}
-
-.card h3{
-    position:absolute;
-    bottom:10px;
-    left:15px;
+.card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
-/* DETAILS */
-.details{
-    display:none;
-    padding:120px 20px;
-    animation:fadeIn .8s ease;
+.details {
+  display: none;
+  padding: 30px;
 }
 
-.detail-item{
-    margin-bottom:40px;
+.details.active {
+  display: block;
 }
 
-.detail-item img{
-    width:100%;
-    max-height:350px;
-    object-fit:cover;
-    border-radius:10px;
+#wap4 { background: #3b0a0a; }
+#wap5 { background: #ffffff; color: black; }
+#wap7 { background: linear-gradient(135deg,#ffffff,#0ea5e9); color: black; }
+#wdp4d { background: linear-gradient(135deg,#000000,#1e293b,#0ea5e9); }
+
+.slider {
+  position: relative;
+  text-align: center;
 }
 
-/* THEMES */
-.wap4{color:#ff4d4d;}
-.wap5{color:#ffffff;}
-.wap7{color:#00d4ff;}
-.wdp4d{color:#9bbcff;}
-
-/* FOOTER */
-footer{
-    text-align:center;
-    padding:25px;
-    background:#111;
-    font-weight:bold;
-    font-size:18px;
+.slider img {
+  width: 250px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 10px;
 }
-footer span{
-    color:#00d4ff;
+
+.slider button {
+  position: absolute;
+  top: 40%;
+  background: rgba(0,0,0,0.5);
+  color: white;
+}
+
+.prev { left: 0; }
+.next { right: 0; }
+
+@media(max-width: 600px) {
+  .card { width: 90%; }
 }
 </style>
 </head>
 
 <body>
 
-<nav>
-<h2>Deepak<span style="color:#00d4ff;">Rail</span></h2>
-</nav>
-
-<section class="hero" id="home">
-<h1>POWERING THE <span>NATION</span></h1>
-<p>Explore India's most powerful locomotives with detailed insights, specs and visuals.</p>
-<p>From classic engines to modern electric beasts — everything in one place.</p>
-<button class="btn" onclick="scrollToTrains()">Explore Fleet</button>
+<section class="hero">
+  <h1>Hello, I'm <span>Deepak</span></h1>
+  <p>Railway Info Website 🚆</p>
+  <button onclick="toggleMode()">🌙 Toggle Mode</button>
 </section>
 
-<section class="section" id="trains">
-<div class="cards-container">
-
-<div class="card" onclick="showD('wap4')">
-<img src="images/wap4-1.jpeg"><h3>WAP-4</h3>
+<div class="search-box">
+  <input type="text" placeholder="Search Locomotive..." onkeyup="searchLoco(this.value)">
 </div>
 
-<div class="card" onclick="showD('wap5')">
-<img src="images/wap5-1.jpeg"><h3>WAP-5</h3>
+<div class="cards">
+
+  <div class="card" onclick="showDetails('wap4', this)">
+    <img src="images/wap4-1.jpeg">
+    <h3>WAP-4</h3>
+  </div>
+
+  <div class="card" onclick="showDetails('wap5', this)">
+    <img src="images/wap5-1.jpeg">
+    <h3>WAP-5</h3>
+  </div>
+
+  <div class="card" onclick="showDetails('wap7', this)">
+    <img src="images/wap7-1.jpeg">
+    <h3>WAP-7</h3>
+  </div>
+
+  <div class="card" onclick="showDetails('wdp4d', this)">
+    <img src="images/wdp4d-1.jpeg">
+    <h3>WDP-4D</h3>
+  </div>
+
 </div>
 
-<div class="card" onclick="showD('wap7')">
-<img src="images/wap7-1.jpeg"><h3>WAP-7</h3>
+<div id="wap4" class="details">
+  <h2>WAP-4</h2>
+  <div class="slider">
+    <button class="prev" onclick="changeSlide(-1,'wap4')">❮</button>
+    <img id="wap4-img" src="images/wap4-1.jpeg">
+    <button class="next" onclick="changeSlide(1,'wap4')">❯</button>
+  </div>
 </div>
 
-<div class="card" onclick="showD('wdp4d')">
-<img src="images/wdp4d-1.jpeg"><h3>WDP-4D</h3>
+<div id="wap5" class="details">
+  <h2>WAP-5</h2>
+  <div class="slider">
+    <button class="prev" onclick="changeSlide(-1,'wap5')">❮</button>
+    <img id="wap5-img" src="images/wap5-1.jpeg">
+    <button class="next" onclick="changeSlide(1,'wap5')">❯</button>
+  </div>
 </div>
 
-</div>
-</section>
-
-<!-- DETAILS -->
-
-<div id="wap4" class="details wap4">
-<button class="btn" onclick="goB()">Back</button>
-<h2>WAP-4</h2>
-<p>WAP-4 is one of the most reliable electric locomotives of Indian Railways.</p>
-<p>Power: 5000 HP | Built: CLW | Speed: 130 km/h</p>
-<p>Used mainly for long-distance express trains across India.</p>
-
-<div class="detail-item"><img src="images/wap4-1.jpeg"></div>
-<div class="detail-item"><img src="images/wap4-2.jpeg"></div>
-<div class="detail-item"><img src="images/wap4-3.jpeg"></div>
+<div id="wap7" class="details">
+  <h2>WAP-7</h2>
+  <div class="slider">
+    <button class="prev" onclick="changeSlide(-1,'wap7')">❮</button>
+    <img id="wap7-img" src="images/wap7-1.jpeg">
+    <button class="next" onclick="changeSlide(1,'wap7')">❯</button>
+  </div>
 </div>
 
-<div id="wap5" class="details wap5">
-<button class="btn" onclick="goB()">Back</button>
-<h2>WAP-5</h2>
-<p>High-speed locomotive based on Swiss technology.</p>
-<p>Speed: 160 km/h | Tech: ABB | Feature: Regenerative braking</p>
-<p>Used in premium trains like Shatabdi & Gatimaan Express.</p>
-
-<div class="detail-item"><img src="images/wap5-1.jpeg"></div>
-<div class="detail-item"><img src="images/wap5-2.jpeg"></div>
-<div class="detail-item"><img src="images/wap5-3.jpeg"></div>
+<div id="wdp4d" class="details">
+  <h2>WDP-4D</h2>
+  <div class="slider">
+    <button class="prev" onclick="changeSlide(-1,'wdp4d')">❮</button>
+    <img id="wdp4d-img" src="images/wdp4d-1.jpeg">
+    <button class="next" onclick="changeSlide(1,'wdp4d')">❯</button>
+  </div>
 </div>
-
-<div id="wap7" class="details wap7">
-<button class="btn" onclick="goB()">Back</button>
-<h2>WAP-7</h2>
-<p>Most powerful passenger locomotive in India.</p>
-<p>Power: 6350 HP | Use: LHB trains | Feature: High torque</p>
-<p>Handles heavy loads with excellent acceleration.</p>
-
-<div class="detail-item"><img src="images/wap7-1.jpeg"></div>
-<div class="detail-item"><img src="images/wap7-2.jpeg"></div>
-<div class="detail-item"><img src="images/wap7-3.jpeg"></div>
-</div>
-
-<div id="wdp4d" class="details wdp4d">
-<button class="btn" onclick="goB()">Back</button>
-<h2>WDP-4D</h2>
-<p>Diesel locomotive with dual cab design.</p>
-<p>Power: 4500 HP | Type: Diesel | Built by EMD</p>
-<p>Used in non-electrified routes across India.</p>
-
-<div class="detail-item"><img src="images/wdp4d-1.jpeg"></div>
-<div class="detail-item"><img src="images/wdp4d-2.jpeg"></div>
-<div class="detail-item"><img src="images/wdp4d-3.jpeg"></div>
-</div>
-
-<footer>
-<span>Passionate by Deepak RailWorks</span> | Indian Railways
-</footer>
 
 <script>
-function scrollToTrains(){
-document.getElementById('trains').scrollIntoView({behavior:'smooth'});
+function toggleMode() {
+  document.body.classList.toggle("light");
 }
 
-function showD(id){
-document.getElementById('home').style.display='none';
-document.getElementById('trains').style.display='none';
-document.getElementById(id).style.display='block';
+function searchLoco(val) {
+  let cards = document.querySelectorAll(".card");
+  cards.forEach(card => {
+    card.style.display = card.innerText.toLowerCase().includes(val.toLowerCase()) ? "block" : "none";
+  });
 }
 
-function goB(){
-document.querySelectorAll('.details').forEach(d=>d.style.display='none');
-document.getElementById('home').style.display='flex';
-document.getElementById('trains').style.display='block';
+function showDetails(id, el) {
+  document.querySelectorAll('.details').forEach(d => d.classList.remove('active'));
+  document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
+}
+
+let images = {
+  wap4: ["images/wap4-1.jpeg","images/wap4-2.jpeg","images/wap4-3.jpeg"],
+  wap5: ["images/wap5-1.jpeg","images/wap5-2.jpeg","images/wap5-3.jpeg"],
+  wap7: ["images/wap7-1.jpeg","images/wap7-2.jpeg","images/wap7-3.jpeg"],
+  wdp4d: ["images/wdp4d-1.jpeg","images/wdp4d-2.jpeg","images/wdp4d-3.jpeg"]
+};
+
+let index = { wap4:0, wap5:0, wap7:0, wdp4d:0 };
+
+function changeSlide(dir, loco) {
+  index[loco] += dir;
+
+  if(index[loco] < 0) index[loco] = images[loco].length - 1;
+  if(index[loco] >= images[loco].length) index[loco] = 0;
+
+  document.getElementById(loco+"-img").src = images[loco][index[loco]];
 }
 </script>
 
