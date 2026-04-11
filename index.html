@@ -129,7 +129,7 @@ body.light .card {
   width: 100%;
   max-width: 500px;
   border-radius: 10px;
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
 }
 
 .fullscreen {
@@ -279,8 +279,10 @@ function changeSlide(dir, loco) {
     if (index[loco] < 0) index[loco] = images[loco].length - 1;
     if (index[loco] >= images[loco].length) index[loco] = 0;
     imgElement.src = images[loco][index[loco]];
-    imgElement.style.opacity = 1;
-  }, 300);
+    imgElement.onload = ()=> {
+    imgElement.style.opacity=1;
+    }
+  },200);
 }
 
 function startAutoSlide(loco) {
