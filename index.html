@@ -118,7 +118,8 @@ nav a {
 }
 
 .slider img {
-  width:260px;
+  width:260%;
+  max-width:500px;
   border-radius:10px;
   cursor:pointer;
 }
@@ -195,7 +196,7 @@ footer {
 <img id="wap4-img" src="images/wap4-1.jpeg" onclick="openFull(this.src)">
 <button onclick="changeSlide(1,'wap4')">❯</button>
 </div>
-<p>5000 HP | Electric | 140 km/h</p>
+<p>5000 HP | Electric | 140 km/h  | fast as it can!</p>
 </div>
 
 <div id="wap5" class="details">
@@ -239,51 +240,59 @@ footer {
 
 <footer>© Deepak Rail World</footer>
 
-<audio id="horn" src="horn.mp3"></audio>
+<audio id="horn" src="horn.mp3"
+  preload="auto"></audio>
 
 <script>
-window.onload=()=>document.getElementById("loader").style.display="none";
+window.onload = () => document.getElementById("loader").style.display = "none";
 
-function toggleMode(){
-document.body.classList.toggle("light");
+function toggleMode() {
+  document.body.classList.toggle("light");
 }
 
-let images={
-wap4:["images/wap4-1.jpeg","images/wap4-2.jpeg","images/wap4-3.jpeg"],
-wap5:["images/wap5-1.jpeg","images/wap5-2.jpeg","images/wap5-3.jpeg"],
-wap7:["images/wap7-1.jpeg","images/wap7-2.jpeg","images/wap7-3.jpeg"],
-wdp4d:["images/wdp4d-1.jpeg","images/wdp4d-2.jpeg","images/wdp4d-3.jpeg"]
+let images = {
+  wap4: ["images/wap4-1.jpeg", "images/wap4-2.jpeg", "images/wap4-3.jpeg"],
+  wap5: ["images/wap5-1.jpeg", "images/wap5-2.jpeg", "images/wap5-3.jpeg"],
+  wap7: ["images/wap7-1.jpeg", "images/wap7-2.jpeg", "images/wap7-3.jpeg"],
+  wdp4d: ["images/wdp4d-1.jpeg", "images/wdp4d-2.jpeg", "images/wdp4d-3.jpeg"]
 };
 
-let index={wap4:0,wap5:0,wap7:0,wdp4d:0};
-let intervals={};
+let index = { wap4: 0, wap5: 0, wap7: 0, wdp4d: 0 };
+let intervals = {};
 
-function changeSlide(dir,loco){
-index[loco]+=dir;
-if(index[loco]<0) index[loco]=images[loco].length-1;
-if(index[loco]>=images[loco].length) index[loco]=0;
-document.getElementById(loco+"-img").src=images[loco][index[loco]];
+function changeSlide(dir, loco) {
+  index[loco] += dir;
+  if (index[loco] < 0) index[loco] = images[loco].length - 1;
+  if (index[loco] >= images[loco].length) index[loco] = 0;
+  document.getElementById(loco + "-img").src = images[loco][index[loco]];
 }
 
-function startAutoSlide(loco){
-if(intervals[loco]) clearInterval(intervals[loco]);
-intervals[loco]=setInterval(()=>changeSlide(1,loco),3000);
+function startAutoSlide(loco) {
+  if (intervals[loco]) clearInterval(intervals[loco]);
+  intervals[loco] = setInterval(() => changeSlide(1, loco), 3000);
 }
 
-function showDetails(id){
-document.querySelectorAll('.details').forEach(d=>d.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-startAutoSlide(id);
-document.getElementById("horn").play();
+function showDetails(id) {
+  Object.values(intervals).forEach(clearInterval);
+  document.querySelectorAll('.details').forEach(d => d.classList.remove('active'));
+  
+  let target = document.getElementById(id);
+  target.classList.add('active');
+  
+  startAutoSlide(id);
+  
+  document.getElementById("horn").play().catch(e => {});
+  
+  target.scrollIntoView({ behavior: 'smooth' });
 }
 
-function openFull(src){
-document.getElementById("fullscreen").style.display="flex";
-document.getElementById("full-img").src=src;
+function openFull(src) {
+  document.getElementById("fullscreen").style.display = "flex";
+  document.getElementById("full-img").src = src;
 }
 
-function closeFull(){
-document.getElementById("fullscreen").style.display="none";
+function closeFull() {
+  document.getElementById("fullscreen").style.display = "none";
 }
 </script>
 
